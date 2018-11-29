@@ -22,11 +22,21 @@
 - (NSUInteger)hash { return [self yy_modelHash]; } \\\n\
 - (BOOL)isEqual:(id)object { return [self yy_modelIsEqual:object]; }\n\n"
 
-#define YYModelCUstomPropertyMapper @"\n\
+#define YYModelCustomPropertyMapper @"\n\
 + (NSDictionary *)modelCustomPropertyMapper {\n\
+    \\*return @{@\"newKey\":@\"oldKey\"};*\\\n\
     return @{};\n\
 }\n\n\
 "
+
+#define YYModelContainerPropertyGenericClass @"\n\
++ (NSDictionary *)modelContainerPropertyGenericClass {\n\
+    \\*return @{@\"key\":[**** class]};*\\\n\
+    return @{};\n\
+}\n\n\
+"
+
+
 
 #define CopyingCodingDeleteStr @"NSCoding, NSCopying"
 
@@ -60,8 +70,8 @@
     NSData *data = [NSData dataWithData:[self.textView.string dataUsingEncoding:NSUTF8StringEncoding]];
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
     
-    HSGoods *goods = [HSGoods yy_modelWithJSON:json];
-    return;
+//    HSGoods *goods =  
+//    return;
 
     
     NSString *modelFileName = _fileNameTextField.stringValue;
@@ -163,7 +173,8 @@
     NSMutableString * value = [NSMutableString string];
     
     [value appendString:[NSString stringWithFormat:@"@implementation %@ \n",className]];
-    [value appendString:YYModelCUstomPropertyMapper];
+    [value appendString:YYModelCustomPropertyMapper];
+    [value appendString:YYModelContainerPropertyGenericClass];
     [value appendString:@"YYModelSynthCoderAndHash"];
     [value appendString:@"\n\n@end\n\n"];
     return value;
