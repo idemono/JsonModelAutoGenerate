@@ -24,14 +24,14 @@
 
 #define YYModelCustomPropertyMapper @"\n\
 + (NSDictionary *)modelCustomPropertyMapper {\n\
-    \\*return @{@\"newKey\":@\"oldKey\"};*\\\n\
+    /*return @{@\"newKey\":@\"oldKey\"};*/\n\
     return @{};\n\
 }\n\n\
 "
 
 #define YYModelContainerPropertyGenericClass @"\n\
 + (NSDictionary *)modelContainerPropertyGenericClass {\n\
-    \\*return @{@\"key\":[**** class]};*\\\n\
+    /*return @{@\"key\":[**** class]};*/\n\
     return @{};\n\
 }\n\n\
 "
